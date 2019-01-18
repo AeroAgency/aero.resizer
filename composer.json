@@ -1,0 +1,35 @@
+{
+  "name": "aero/aero.resizer",
+  "description": "PHP image resizer",
+  "keywords": [
+    "php",
+    "image",
+    "resize",
+    "aeroidea",
+    "aero",
+    "resizer"
+  ],
+  "homepage": "https://github.com/maxmind/GeoIP2-php",
+  "type": "library",
+  "license": "MIT",
+  "authors": [
+    {
+      "name": "Arthur Garin",
+      "email": "garin@aeroidea.ru",
+      "role": "Developer"
+    },
+    {
+      "name": "Anton Pronin",
+      "email": "pronin@aeroidea.ru",
+      "role": "Developer"
+    }
+  ],
+  "require": {
+    "php": ">=7.0.0"
+  },
+  "autoload": {
+    "psr-4": {
+      "Aero\\Resizer\\": "src"
+    }
+  }
+}
