@@ -9,7 +9,6 @@
     "aero",
     "resizer"
   ],
-  "homepage": "https://github.com/maxmind/GeoIP2-php",
   "type": "library",
   "license": "MIT",
   "authors": [
