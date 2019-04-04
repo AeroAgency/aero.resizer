@@ -232,7 +232,7 @@ class Resizer
         $width = $this->width;
         $height = $this->height;
 
-        if ((is_null($this->width) || is_null($this->height)) && is_file($_SERVER['DOCUMENT_ROOT'] . $this->input)) {
+        if ((empty($this->width) || empty($this->height)) && is_file($_SERVER['DOCUMENT_ROOT'] . $this->input)) {
             list($fileWidth, $fileHeight) = getimagesize($_SERVER['DOCUMENT_ROOT'] . $this->input);
 
             if (!$width && $height) {
