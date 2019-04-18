@@ -9,7 +9,7 @@
 namespace Aero\Resizer;
 
 
-class GoResizer implements ResizerInterface
+class GoResizer extends BaseResizer
 {
     const RESIZER_SCRIPT_NAME = __DIR__ . '/bin/resizer';
 
@@ -25,7 +25,7 @@ class GoResizer implements ResizerInterface
      */
     public function resizeImg($input, $width, $height, $output = '', $quality = 90, $output_format = '', $force = false)
     {
-        if ($output !== $input && !$force && file_exists($_SERVER['DOCUMENT_ROOT'] . $output)) {
+        if ($this->isImageExist($input, $force, $output)) {
             return $output;
         }
         return $this->resize($input, $width, $height, $output, 1, $quality);
@@ -57,7 +57,7 @@ class GoResizer implements ResizerInterface
      */
     public function resizeImgProportional($input, $width, $height, $output = '', $quality = 90, $output_format = '', $force = false)
     {
-        if ($output !== $input && !$force && file_exists($_SERVER['DOCUMENT_ROOT'] . $output)) {
+        if ($this->isImageExist($input, $force, $output)) {
             return $output;
         }
         return $this->resize($input, $width, $height, $output, 0, $quality);

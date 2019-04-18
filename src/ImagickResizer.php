@@ -10,7 +10,7 @@ namespace Aero\Resizer;
 
 use Imagick;
 
-class ImagickResizer implements ResizerInterface
+class ImagickResizer extends BaseResizer
 {
     /**
      * @param string $input
@@ -28,13 +28,14 @@ class ImagickResizer implements ResizerInterface
         $this->prepareArguments($input, $output, $output_format);
         $foutput = $_SERVER['DOCUMENT_ROOT'] . $output;
 
-        if ($foutput !== $input && !$force && file_exists($foutput) && filemtime($foutput) > filemtime($input)) {
-            return $output;
-        }
-
         if (!file_exists($input)) {
             return "";
         }
+
+        if ($this->isImageExist($input, $force, $foutput)) {
+            return $output;
+        }
+
 
         $imagick = new Imagick($input);
         $imagick->cropThumbnailImage($width, $height);
@@ -107,14 +108,15 @@ class ImagickResizer implements ResizerInterface
     {
         $this->prepareArguments($input, $output, $output_format);
         $foutput = $_SERVER['DOCUMENT_ROOT'] . $output;
-
-        if ($foutput !== $input && !$force && file_exists($foutput) && filemtime($foutput) > filemtime($input)) {
-            return $output;
-        }
-
+        
         if (!file_exists($input)) {
             return "";
         }
+
+        if ($this->isImageExist($input, $force, $foutput)) {
+            return $output;
+        }
+
 
         $imagick = new Imagick($input);
         $imagick->resizeImage($width, $height, imagick::FILTER_CATROM, 1, true);
@@ -144,4 +146,5 @@ class ImagickResizer implements ResizerInterface
     {
         return true;
     }
+
 }
