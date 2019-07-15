@@ -6,7 +6,7 @@
  * Time: 13:57
  */
 
-namespace Aero\Resizer;
+namespace Aeroidea\Resizer;
 
 
 abstract class BaseResizer implements ResizerInterface

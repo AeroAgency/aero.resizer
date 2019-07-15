@@ -1,6 +1,6 @@
 <?php
 
-namespace Aero\Resizer;
+namespace Aeroidea\Resizer;
 
 class NullResizer implements ResizerInterface
 {

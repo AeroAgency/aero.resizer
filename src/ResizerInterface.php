@@ -6,7 +6,7 @@
  * Time: 12:50
  */
 
-namespace Aero\Resizer;
+namespace Aeroidea\Resizer;
 
 
 interface ResizerInterface

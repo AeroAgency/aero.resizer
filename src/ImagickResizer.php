@@ -6,7 +6,7 @@
  * Time: 12:49
  */
 
-namespace Aero\Resizer;
+namespace Aeroidea\Resizer;
 
 use Imagick;
 

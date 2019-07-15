@@ -6,7 +6,7 @@
  * Time: 18:16
  */
 
-namespace Aero\Resizer\Exception;
+namespace Aeroidea\Resizer\Exception;
 
 
 class ResizerException extends \Exception

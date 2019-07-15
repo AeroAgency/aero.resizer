@@ -1,12 +1,13 @@
 {
-  "name": "aero/aero.resizer",
+  "name": "aeroidea/aeroidea.resizer",
   "description": "PHP image resizer",
   "keywords": [
     "php",
-    "image",
-    "resize",
+    "bitrix",
     "aeroidea",
     "aero",
+    "image",
+    "resize",
     "resizer"
   ],
   "type": "library",
@@ -28,7 +29,7 @@
   },
   "autoload": {
     "psr-4": {
-      "Aero\\Resizer\\": "src"
+      "Aeroidea\\Resizer\\": "src"
     }
   }
 }

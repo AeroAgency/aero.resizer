@@ -6,13 +6,13 @@
  * Time: 13:08
  */
 
-namespace Aero\Resizer;
+namespace Aeroidea\Resizer;
 
-use Aero\Resizer\Exception\ResizerException;
+use Aeroidea\Resizer\Exception\ResizerException;
 
 /**
  * Class ResizerFactory
- * @package Aero\Resizer
+ * @package Aeroidea\Resizer
  */
 class Resizer
 {
