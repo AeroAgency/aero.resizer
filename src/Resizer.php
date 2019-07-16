@@ -1,7 +1,7 @@
 <?php
 /**
  * Created by PhpStorm.
- * User: user1
+ * User: GarinAG
  * Date: 16.01.2019
  * Time: 13:08
  */
@@ -9,6 +9,7 @@
 namespace Aeroidea\Resizer;
 
 use Aeroidea\Resizer\Exception\ResizerException;
+use Exception;
 
 /**
  * Class ResizerFactory
@@ -25,14 +26,17 @@ class Resizer
      * @var int Пропорциональный ресайз
      */
     const RESIZE_PROPORTIONAL = 2;
+
     /**
      * @var string Базовый ресайзер
      */
     protected static $baseResizer = NullResizer::class;
+
     /**
      * @var array Переменная кэша
      */
     protected static $cache = [];
+
     /**
      * @var array Список доступных расширений
      */
@@ -44,50 +48,62 @@ class Resizer
         'bmp' => 'image/bmp',
         'webp' => 'image/webp',
     ];
+
     /**
-     * @var ResizerInterface
+     * @var ResizerInterface Ресайзер
      */
     protected $resizer;
-    /**
-     * @var null
-     */
-    protected $mainInput = null;
+
     /**
      * @var null|int|string Исходный файл
      */
+    protected $mainInput = null;
+
+    /**
+     * @var null|int|string Исходный преобразованный файл
+     */
     protected $input = null;
+
     /**
      * @var null|string Путь к итоговому изображению
      */
     protected $output = null;
+
     /**
      * @var string Формат выходного файла
      */
     protected $output_format = null;
+
     /**
      * @var int Качество сжатия
      */
     protected $quality = 80;
+
     /**
      * @var int Базовый тип ресайза
      */
     protected $resizeType = self::RESIZE_PROPORTIONAL;
+
     /**
      * @var null|string Итог ресайза, возвращает путь до картинки, либо null
      */
     protected $result = null;
+
     /**
      * @var null Ширина итогового изображения
      */
     protected $width = null;
+
     /**
      * @var null Высота итогового изображения
      */
     protected $height = null;
+
     /**
      * @var bool Обязательное пересоздание файла
      */
     protected $force = false;
+
     /**
      * @var string Папка для сохранения итоговых изображений
      */
@@ -102,6 +118,8 @@ class Resizer
     }
 
     /**
+     * Получение объекта ресайзера
+     *
      * @return Resizer
      */
     public static function getInstance()
@@ -111,6 +129,7 @@ class Resizer
 
     /**
      * Установка базового ресайзера
+     *
      * @param string $resizer Название класса ресайзера
      */
     public static function setBaseResizer($resizer = null)
@@ -128,6 +147,7 @@ class Resizer
 
     /**
      * Установка ресайзера
+     *
      * @param string $resizer Название класса ресайзера
      * @return Resizer
      */
@@ -146,6 +166,7 @@ class Resizer
 
     /**
      * Установка пути исходного файла, задается от корня сайта
+     *
      * @param int|string $input Исходное изображение
      * @return Resizer
      */
@@ -158,6 +179,7 @@ class Resizer
 
     /**
      * Преобразование исходного изображения
+     *
      * @param string|int $input Исходное изображение
      */
     protected function prepareInput($input)
@@ -172,6 +194,7 @@ class Resizer
 
     /**
      * Установка качества сжатия
+     *
      * @param int $quality Качество изображения в пределах 1-100
      * @return Resizer
      */
@@ -186,6 +209,7 @@ class Resizer
 
     /**
      * Установка итогового пути, задается от корня сайта
+     *
      * @param string $output Путь к итоговому изображению
      * @return Resizer
      */
@@ -198,6 +222,7 @@ class Resizer
 
     /**
      * Установка типа ресайза
+     *
      * @param int $resizeType Тип ресайза (точный/пропорциональный)
      * @return Resizer
      */
@@ -215,6 +240,7 @@ class Resizer
 
     /**
      * Возвращает ссылку на результат ресайза
+     *
      * @return string|null
      */
     public function getResult()
@@ -224,8 +250,9 @@ class Resizer
 
     /**
      * Выполнить ресайз
+     *
      * @return Resizer
-     * @throws \Exception
+     * @throws Exception
      */
     public function run()
     {
@@ -259,10 +286,11 @@ class Resizer
 
     /**
      * Точный ресайз изображения
+     *
      * @param int $width Ширина итогового изображения
      * @param int $height Высота итогового изображения
      * @return $this
-     * @throws \Exception
+     * @throws Exception
      */
     public function resizeImg($width, $height)
     {
@@ -278,7 +306,7 @@ class Resizer
             try {
                 $this->result = $this->resizer->resizeImg($input, $width, $height, $output, $this->quality, $this->output_format, $this->force);
                 self::$cache[$md5] = $this->result;
-            } catch (\Exception $e) {
+            } catch (Exception $e) {
                 throw new ResizerException($e->getMessage(), $e->getCode(), $e);
             }
         }
@@ -288,37 +316,39 @@ class Resizer
 
     /**
      * Проверка исходного файла
-     * @throws \Exception
+     *
+     * @throws Exception
      */
     protected function checkInputFile()
     {
         if (!$this->input || !file_exists($_SERVER['DOCUMENT_ROOT'] . $this->input)) {
-            throw new \Exception('File not found.');
+            throw new Exception('File not found.');
         }
 
         $fileType = mime_content_type($_SERVER['DOCUMENT_ROOT'] . $this->input);
 
         if (!in_array($fileType, self::$imageExtensions)) {
-            throw new \Exception('Wrong file type.');
+            throw new Exception('Wrong file type.');
         }
     }
 
     /**
      * Формирование пути итогового изображения
+     *
      * @param int $width Ширина изображения
      * @param int $height Высота изображения
      * @param int $type Тип ресайза
      * @return null|string
-     * @throws \Exception
+     * @throws Exception
      */
     protected function prepareOutput($width, $height, $type)
     {
         if (!$width) {
-            throw new \Exception('width param is required');
+            throw new Exception('width param is required');
         }
 
         if (!$height) {
-            throw new \Exception('height param is required');
+            throw new Exception('height param is required');
         }
 
         if ($this->resizer->needPrepareOutput()) {
@@ -351,7 +381,7 @@ class Resizer
                 }
 
                 if (!is_writable($path)) {
-                    throw new \Exception('Output folder permissions denied.');
+                    throw new Exception('Output folder permissions denied.');
                 }
             }
         } else {
@@ -363,10 +393,11 @@ class Resizer
 
     /**
      * Пропорциональный ресайз изображения
+     *
      * @param int $width Ширина итогового изображения
      * @param int $height Высота итогового изображения
      * @return $this
-     * @throws \Exception
+     * @throws Exception
      */
     public function resizeImgProportional($width, $height)
     {
@@ -382,7 +413,7 @@ class Resizer
                 $this->result = $this->resizer->resizeImgProportional($input, $width, $height, $output, $this->quality, $this->output_format,
                     $this->force);
                 self::$cache[$md5] = $this->result;
-            } catch (\Exception $e) {
+            } catch (Exception $e) {
                 throw new ResizerException($e->getMessage(), $e->getCode(), $e);
             }
         }
@@ -392,6 +423,7 @@ class Resizer
 
     /**
      * Установка ширины изображения
+     *
      * @param int $width Ширина
      * @return Resizer
      */
@@ -404,6 +436,7 @@ class Resizer
 
     /**
      * Установыка высоты изображения
+     *
      * @param int $height Высота
      * @return Resizer
      */
@@ -416,16 +449,17 @@ class Resizer
 
     /**
      * Установка формата выходного файла
+     *
      * @param string $output_format Формат выходного файла
      * @return Resizer
-     * @throws \Exception
+     * @throws Exception
      */
     public function setOutputFormat($output_format)
     {
         if (array_key_exists($output_format, self::$imageExtensions)) {
             $this->output_format = $output_format;
         } else {
-            throw new \Exception('Wrong output file type.');
+            throw new Exception('Wrong output file type.');
         }
 
         return $this;
@@ -433,6 +467,7 @@ class Resizer
 
     /**
      * Установка обязательного пересоздания файла
+     *
      * @param bool $force
      * @return Resizer
      */
@@ -445,6 +480,7 @@ class Resizer
 
     /**
      * Установка папки для сохранения итоговых изображений
+     *
      * @param string $outputFolder Путь к папке, задается от корня сайта
      * @return Resizer
      */

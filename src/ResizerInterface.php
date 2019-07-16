@@ -1,7 +1,7 @@
 <?php
 /**
  * Created by PhpStorm.
- * User: user1
+ * User: GarinAG
  * Date: 16.01.2019
  * Time: 12:50
  */
@@ -9,10 +9,15 @@
 namespace Aeroidea\Resizer;
 
 
+/**
+ * Interface ResizerInterface
+ * @package Aeroidea\Resizer
+ */
 interface ResizerInterface
 {
     /**
      * Точный ресайз изображения
+     *
      * @param string $input Путь к исходному изображению
      * @param int $width Ширина итогового изображения
      * @param int $height Высота итогового изображения
@@ -26,6 +31,7 @@ interface ResizerInterface
 
     /**
      * Пропорциональный ресайз изображения
+     *
      * @param string $input Путь к исходному изображению
      * @param int $width Ширина итогового изображения
      * @param int $height Высота итогового изображения
@@ -39,18 +45,21 @@ interface ResizerInterface
 
     /**
      * Проверка доступности ресайзера
+     *
      * @return bool
      */
     public function checkResizer();
 
     /**
      * Подготавливать путь к выходному файлу
+     *
      * @return bool
      */
     public function needPrepareOutput();
 
     /**
      * Подготавливать исходный сайт
+     *
      * @return bool
      */
     public function needPrepareInput();

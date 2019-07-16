@@ -9,11 +9,20 @@
 namespace Aeroidea\Resizer;
 
 
+/**
+ * Class BaseResizer
+ * @package Aeroidea\Resizer
+ */
 abstract class BaseResizer implements ResizerInterface
 {
+    /**
+     *  Минимальный размер файла
+     */
     const MIN_FILE_SIZE = 30;
 
     /**
+     * Проверка наличия конечного файла
+     *
      * @param $input
      * @param $force
      * @param $foutput

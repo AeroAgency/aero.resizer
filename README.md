@@ -1,4 +1,6 @@
-# Документация библиотеки Resizer
+Документация библиотеки Resizer
+=========
+
 
 ## Пример использования:
 
@@ -16,6 +18,7 @@ $arImgResize = \Aero\Resizer\Resizer::getInstance()
     ->getResult();
 ```
 
+
 ## Подключение ImagickResizer:
 #### Для использования данного ресайзера на стороне сервера должна быть установлена библиотека ImageMagick
 ##### Пример подключения ImageMagick6:
@@ -26,5 +29,21 @@ $arImgResize = \Aero\Resizer\Resizer::getInstance()
 * __Add extension to php__: echo "extension=imagick.so" > /etc/php.d/imagick.ini
 * __Restart php__: sudo systemctl restart php-fpm
 
+
 ## Подключение GoResizer:
 * __Add permissions to bin file__: sudo chmod +x resizer/src/bin/resizer
+
+
+## Docs
+
+* Aeroidea\Resizer
+    * [ImagickResizer](docs/Aeroidea-Resizer-ImagickResizer.md)
+    * [NullResizer](docs/Aeroidea-Resizer-NullResizer.md)
+    * [GoResizer](docs/Aeroidea-Resizer-GoResizer.md)
+    * [BaseResizer](docs/Aeroidea-Resizer-BaseResizer.md)
+    * [BitrixResizer](docs/Aeroidea-Resizer-BitrixResizer.md)
+    * Aeroidea\Resizer\Exception
+        * [ResizerException](docs/Aeroidea-Resizer-Exception-ResizerException.md)
+    * [ResizerInterface](docs/Aeroidea-Resizer-ResizerInterface.md)
+    * [Resizer](docs/Aeroidea-Resizer-Resizer.md)
+
