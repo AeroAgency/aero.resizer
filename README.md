@@ -1,8 +1,26 @@
-Документация библиотеки Resizer
+aeroidea.resizer
 =========
 
+Image resizing module for 1C-Bitrix.
 
-## Пример использования:
+It is possible to cache and force the creation of a resize.
+
+Implemented receivers based on:
+* GD library
+* ImageMagick library
+* Go Lang
+
+## Installation
+
+Library can be installed into application using `Composer` dependency manager.
+
+`composer require aeroidea/aero.resizer dev-master`
+
+Manual
+1. Download the archive with the module
+2. unpack to `www/local/modules`
+
+## Usage
 
 ```php    
 $arImgResize = \Aero\Resizer\Resizer::getInstance()
@@ -19,9 +37,9 @@ $arImgResize = \Aero\Resizer\Resizer::getInstance()
 ```
 
 
-## Подключение ImagickResizer:
-#### Для использования данного ресайзера на стороне сервера должна быть установлена библиотека ImageMagick
-##### Пример подключения ImageMagick6:
+## Usage of ImagickResizer:
+To use this resizing tool, the ImageMagick library must be installed on the server side
+Example of installing ImageMagick 6 in CentOS:
 * __Download latest remi-release rpm__: wget http://rpms.remirepo.net/enterprise/7/remi/x86_64/remi-release-7.6-1.el7.remi.noarch.rpm
 * __Install remi-release rpm__: rpm -Uvh remi-release*rpm
 * __Install ImageMagick6 rpm package__: yum --enablerepo=remi install ImageMagick6 ImageMagick6-devel
@@ -30,7 +48,7 @@ $arImgResize = \Aero\Resizer\Resizer::getInstance()
 * __Restart php__: sudo systemctl restart php-fpm
 
 
-## Подключение GoResizer:
+## Usage of GoResizer:
 * __Add permissions to bin file__: sudo chmod +x resizer/src/bin/resizer
 
 
