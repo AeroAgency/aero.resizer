@@ -14,7 +14,7 @@ Implemented receivers based on:
 
 Library can be installed into application using `Composer` dependency manager.
 
-`composer require aeroidea/aero.resizer dev-master`
+`composer require aeroidea/aeroidea.resizer dev-master`
 
 Manual
 1. Download the archive with the module
