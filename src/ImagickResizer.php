@@ -88,7 +88,7 @@ class ImagickResizer extends BaseResizer
 
         if ($output_format) {
             $white = new Imagick();
-            $white->newImage($imagick->getImageWidth(), $imagick->getImageHeight(), "white");
+            $white->newImage($imagick->getImageWidth(), $imagick->getImageHeight(), new \ImagickPixel('transparent'));
             $white->compositeimage($imagick, Imagick::COMPOSITE_OVER, 0, 0);
             $white->setImageFormat($output_format);
             $white->optimizeImageLayers();
